@@ -75,6 +75,7 @@ int main()
 void input(struct monthlyBudget silly_budget)
 {   int i = 0; // incrementing variable
     double silly_input = -99.99; // a temporary variable to hold input
+    double * dPtr = (* double)silly_budget;
     
     while (i < CATEGORY) // while i is less than the number of categories in the budget
     {   silly_input = 0.0; //reset silly_input
@@ -83,25 +84,30 @@ void input(struct monthlyBudget silly_budget)
         // silly_input now has a valid double in it
         
         //string catengate the category_names[i] to the end of the budget. call to give the value
-       silly_budget.**(category_names[i]) = silly_input; //deference to get the string in category_names[i] and use
+       *dPtr = silly_input; //deference to get the string in category_names[i] and use
         
         // change getDoubleINput so that you are giving it a struct
         i++; //increment through the categories
+        dPtr++; // doubles are 8 bytes, so this moves 8 bytes over the struct to the second
     }
 } //end of input
 
 
 void display_checkbook(struct monthlyBudget silly_budget)
 {   int i;
+    double * dPtr = (*double)silly_budget;
+    
     printMessage(summaryBanner);
     while (i < CATEGORY) // while i is less than the number of categories in the budget
     {
-        cout << "\nThe " << category_names[i] << " expenses are at " << silly_budget.**(category_names[i]) << " which is "; // loop through the category names
-        if (    silly_budget.**(category_names[i]) > budget_flags[i]    )
+        cout << "\nThe " << category_names[i] << " expenses are at " << *dPtr << " which is "; // loop through the category names
+        if (    *dPtr > budget_flags[i]    )
         {   cout << "over budget."; }
         else
         {   cout << "under budget."; }
         // silly_input now has a valid double in it
+        
+        dPtr++;
         }
 } // end of display_checkbook
 
@@ -126,8 +132,8 @@ bool confirmation = false;
         if (ptr != numInput)
             {   *data = num;
                 confirmation = true;
-                printf("The number double is %lf\n", num); //TESTING
-                printf("The string part is |%s|\n", ptr); //TESTING
+                // printf("The number double is %lf\n", num); //TESTING
+                // printf("The string part is |%s|\n", ptr); //TESTING
                 if (num > 0)
                 {
                     withinRange = true; //make sure the input wasn't a negative number
