@@ -24,6 +24,7 @@
 
 #include <iostream>
 #include <stdio.h>
+#include <string.h>
 using namespace std;
 
 // ~~~ // STRUCT // ~~~ //
@@ -64,10 +65,16 @@ int main()
     input(budget);
     printMessage(summaryBanner);
     // display_checkbook(budget);
-
-    
     return 0;
 } // end of main
+
+
+
+
+
+
+
+
 
 void input(struct monthlyBudget silly_budget)
 {   int i = 0; // incrementing variable
@@ -80,7 +87,7 @@ void input(struct monthlyBudget silly_budget)
         // silly_input now has a valid double in it
         
         //string catengate the category_names[i] to the end of the budget. call to give the value
-       silly_budget.**(category_names[i]) = silly_input; //deference to get the string in category_names[i] and use
+//       silly_budget.**(category_names[i]) = silly_input; //deference to get the string in category_names[i] and use
         
         // change getDoubleINput so that you are giving it a struct
         i++; //increment through the categories
@@ -93,13 +100,13 @@ void display_checkbook(struct monthlyBudget silly_budget)
     printMessage(summaryBanner);
     while (i < CATEGORY) // while i is less than the number of categories in the budget
     {
-        cout << "\nThe " << category_names[i] << " expenses are at " << silly_budget.**(category_names[i]) << " which is "; // loop through the category names
-        if (    silly_budget.**(category_names[i]) > budget_flags[i]    )
-        {   cout << "over budget."; }
-        else
-        {   cout << "under budget."; }
+//        cout << "\nThe " << category_names[i] << " expenses are at " << silly_budget.**(category_names[i]) << " which is "; // loop through the category names
+//        if (    silly_budget.**(category_names[i]) > budget_flags[i]    )
+//        {   cout << "over budget."; }
+//        else
+//        {   cout << "under budget."; }
         // silly_input now has a valid double in it
-    }
+        }
 } // end of display_checkbook
 
 
@@ -125,10 +132,13 @@ bool confirmation = false;
                 confirmation = true;
                 printf("The number double is %lf\n", num); //TESTING
                 printf("The string part is |%s|\n", ptr); //TESTING
-                // withinRange = thePriceIsRight( data, (double*) monetaryRange[i]); //A pointer to an non-const type can be implicitly converted to a pointer to const-qualified version of the same or compatible type.
+                if (num > 0)
+                {
+                    withinRange = true; //make sure the input wasn't a negative number
+                }
             }
              else // the data entry is char data
-             {  printf("%s", "Error INVALID DATA.\nPlease enter only numerical data in a 00.00 format.\n");
+             {  printf("%s", "Error INVALID DATA.\nPlease enter only positive, numerical data in a 00.00 format.\n");
              }
         
         } // end of while (withinRange == false)
@@ -150,23 +160,23 @@ double validInt = 0.0;
     double intTest = strtod(buff, &end);
     
     if (end == buff) {
-        fprintf(stderr, "%s not a decimal number\n", buff);
+        // fprintf(stderr, "%s not a decimal number\n", buff);
     }
     else if ('\0' != *end) {
-        fprintf(stderr, "%s extra characters at end of input: %s\n", buff, end);
+        // fprintf(stderr, "%s extra characters at end of input: %s\n", buff, end); // TROUBLESHOOTING PURPOSES
         }
         else if ((LONG_MIN == intTest || LONG_MAX == intTest) && ERANGE == errno){
-            fprintf(stderr, "%s out of range of type long\n", buff);
+            // fprintf(stderr, "%s out of range of type long\n", buff); // TROUBLESHOOTING PURPOSES
         }
         else if (intTest > INT_MAX)    {
-            fprintf(stderr, "%f greater than INT_MAX\n", intTest);
+            // fprintf(stderr, "%f greater than INT_MAX\n", intTest); // TROUBLESHOOTING PURPOSES
         }
         else if (intTest < INT_MIN) {
-            fprintf(stderr, "%f less than INT_MIN\n", intTest);
+            // fprintf(stderr, "%f less than INT_MIN\n", intTest); // TROUBLESHOOTING PURPOSES
         }
         else {
             validInt = (double)intTest;
-            // printf("%f is double value ", intTest);
+            // printf("%f is double value ", intTest); // TROUBLESHOOTING PURPOSES
         }
 } // end of validateDouble
 
