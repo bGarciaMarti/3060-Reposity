@@ -80,7 +80,7 @@ void input(struct monthlyBudget silly_budget)
         // silly_input now has a valid double in it
         
         //string catengate the category_names[i] to the end of the budget. call to give the value
-       // silly_budget.**(category_names[i]) = silly_input; //deference to get the string in category_names[i] and use
+       silly_budget.**(category_names[i]) = silly_input; //deference to get the string in category_names[i] and use
         
         // change getDoubleINput so that you are giving it a struct
         i++; //increment through the categories
@@ -93,11 +93,11 @@ void display_checkbook(struct monthlyBudget silly_budget)
     printMessage(summaryBanner);
     while (i < CATEGORY) // while i is less than the number of categories in the budget
     {
-        //cout << "\nThe " << category_names[i] << " expenses are at " << silly_budget.**(category_names[i]) << " which is "; // loop through the category names
-        //if (    silly_budget.**(category_names[i]) > budget_flags[i]    )
-        //{   cout << "over budget."; }
-        //else
-        //{   cout << "under budget."; }
+        cout << "\nThe " << category_names[i] << " expenses are at " << silly_budget.**(category_names[i]) << " which is "; // loop through the category names
+        if (    silly_budget.**(category_names[i]) > budget_flags[i]    )
+        {   cout << "over budget."; }
+        else
+        {   cout << "under budget."; }
         // silly_input now has a valid double in it
     }
 } // end of display_checkbook
