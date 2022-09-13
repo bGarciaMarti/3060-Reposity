@@ -46,6 +46,9 @@ const char * prompt = "\nThis is a student budget checkbook program.\n\n"
 const char * summaryBanner = "\n\n------------------------\n"
                              "    Student's Monthly Budget"
                              "\n------------------------\n";
+const char * fairwell = "\n\n---------------------------------------------------\n"
+                             "Student's Monthly Budget Analysis Completed. Adios~"
+                             "\n---------------------------------------------------\n";
 
 // ~~~ // FUNCTION PROTOTYPES // ~~~ //
 // getting and validating input functions
@@ -54,17 +57,17 @@ void validateDouble(const char *buff);
 void stripStr(char strArray[]);
 void diffInputStr(char strArray[]);
 void printMessage(const char* silly_message);
-void input(struct monthlyBudget silly_budget);
-void brute_force_display_checkbook(struct monthlyBudget silly_budget);
+void input(struct monthlyBudget *silly_budget);
+void brute_force_display_checkbook(struct monthlyBudget *silly_budget);
 
 // ~~~ // MAIN // ~~~ //
 int main()
 {
     monthlyBudget budget; // declare a struct to hold the student's data
-
     printMessage(prompt); // introduce what the program does to the user and how to use it
-    input(budget);
-    brute_force_display_checkbook(budget);
+    input(&budget);
+    brute_force_display_checkbook(&budget);
+    printMessage(fairwell);
     return 0;
 } // end of main
 
@@ -72,10 +75,10 @@ int main()
 
 // ~~~ // FUNCTIONS // ~~~ //
 
-void input(struct monthlyBudget silly_budget)
+void input(struct monthlyBudget *silly_budget)
 {   int i = 0; // incrementing variable
     double silly_input = -99.99; // a temporary variable to hold input
-    double *dPtr = &silly_budget.Housing; // points to memory, not value
+    double *dPtr = &silly_budget->Housing; // points to memory, not value
     
     while (i < CATEGORY) // while i is less than the number of categories in the budget
     {   silly_input = 0.0; //reset silly_input
@@ -85,11 +88,11 @@ void input(struct monthlyBudget silly_budget)
         // silly_input now has a valid double in it
         
         //string catengate the category_names[i] to the end of the budget. call to give the value
-       *dPtr = silly_input; //deference to get the string in category_names[i] and use
+        *dPtr = silly_input; //deference to get the string in category_names[i] and use
         
         // change getDoubleINput so that you are giving it a struct
         i++; //increment through the categories
-        dPtr++; // doubles are 8 bytes, so this moves 8 bytes over the struct to the second
+        dPtr++; // doubles are 8 bytes, so this moves 8 bytes over the struct to the next struct-element, since they're all doubles
     }
 } //end of input
 
@@ -202,30 +205,94 @@ void printMessage(const char* silly_message)
     }puts(""); //formatting
 } // end of printMessage
 
-void brute_force_display_checkbook(struct monthlyBudget silly_budget)
+void brute_force_display_checkbook(struct monthlyBudget *silly_budget)
 {   int i = 0;
     printMessage(summaryBanner);
-    cout << "The " << category_names[i] << " expenses are at " << silly_budget.Housing << " which is "; // loop through the category names
-    if (    silly_budget.Housing > budget_flags[i]    )
-    {   cout << "over budget.\n"; }
+// Housing
+    cout << "The " << category_names[i] << " expenses are at " << silly_budget->Housing << " which is "; // loop through the category names
+    if (    silly_budget->Housing > budget_flags[i]    )
+    {   cout << "over budget.\n------------------------\n"; }
     else
-    {   cout << "under budget.\n"; }
-    
+    {   cout << "under budget.\n------------------------\n"; }
+    i++;
+// Utilities
+    cout << "The " << category_names[i] << " expenses are at " << silly_budget->Utilities << " which is "; // loop through the category names
+    if (    silly_budget->Utilities > budget_flags[i]    )
+    {   cout << "over budget.\n------------------------\n"; }
+    else
+    {   cout << "under budget.\n------------------------\n"; }
+    i++;
+// Household_expenses
+    cout << "The " << category_names[i] << " expenses are at " << silly_budget->Household_expenses << " which is "; // loop through the category names
+    if (    silly_budget->Household_expenses > budget_flags[i]    )
+    {   cout << "over budget.\n------------------------\n"; }
+    else
+    {   cout << "under budget.\n------------------------\n"; }
+    i++;
+// Transportion
+    cout << "The " << category_names[i] << " expenses are at " << silly_budget->Transportation << " which is "; // loop through the category names
+    if (    silly_budget->Transportation > budget_flags[i]    )
+    {   cout << "over budget.\n------------------------\n"; }
+    else
+    {   cout << "under budget.\n------------------------\n"; }
+    i++;
+//Food
+    cout << "The " << category_names[i] << " expenses are at " << silly_budget->Food << " which is "; // loop through the category names
+    if (    silly_budget->Food > budget_flags[i]    )
+    {   cout << "over budget.\n------------------------\n"; }
+    else
+    {   cout << "under budget.\n------------------------\n"; }
+    i++;
+//Medical
+    cout << "The " << category_names[i] << " expenses are at " << silly_budget->Medical << " which is "; // loop through the category names
+    if (    silly_budget->Medical > budget_flags[i]    )
+    {   cout << "over budget.\n------------------------\n"; }
+    else
+    {   cout << "under budget.\n------------------------\n"; }
+    i++;
+//Insurance
+    cout << "The " << category_names[i] << " expenses are at " << silly_budget->Insurance << " which is "; // loop through the category names
+    if (    silly_budget->Insurance > budget_flags[i]    )
+    {   cout << "over budget.\n------------------------\n"; }
+    else
+    {   cout << "under budget.\n------------------------\n"; }
+    i++;
+// Entertainment
+    cout << "The " << category_names[i] << " expenses are at " << silly_budget->Entertainment << " which is "; // loop through the category names
+    if (    silly_budget->Entertainment > budget_flags[i]    )
+    {   cout << "over budget.\n------------------------\n"; }
+    else
+    {   cout << "under budget.\n------------------------\n"; }
+    i++;
+// Clothing
+    cout << "The " << category_names[i] << " expenses are at " << silly_budget->Clothing << " which is "; // loop through the category names
+    if (    silly_budget->Clothing > budget_flags[i]    )
+    {   cout << "over budget.\n------------------------\n"; }
+    else
+    {   cout << "under budget.\n------------------------\n"; }
+    i++;
+// Miscellaneous
+    cout << "The " << category_names[i] << " expenses are at " << silly_budget->Miscellaneous << " which is "; // loop through the category names
+    if (    silly_budget->Miscellaneous > budget_flags[i]    )
+    {   cout << "over budget.\n------------------------\n"; }
+    else
+    {   cout << "under budget.\n------------------------\n"; }
+    i++;
 }
 
 
-void display_checkbook(struct monthlyBudget silly_budget)
-{   int i;
-    double *dPtr = &silly_budget.Housing; // points to memory, not value
+void display_checkbook(struct monthlyBudget *silly_budget)
+{   int i = 0;
+    double *dPtr = &silly_budget->Housing; // points to memory, not value
     
     printMessage(summaryBanner);
     while (i < CATEGORY) // while i is less than the number of categories in the budget
     {
         cout << "\nThe " << category_names[i] << " expenses are at " << *dPtr << " which is "; // loop through the category names
         if (    *dPtr > budget_flags[i]    )
-        {   cout << "over budget."; }
+        {   cout << "over budget.\n------------------------\n"; }
         else
-        {   cout << "under budget."; }
+        {   cout << "under budget.\n------------------------\n"; }
         // silly_input now has a valid double in it
         
         dPtr++;
