@@ -159,7 +159,7 @@ void findCustomer(struct Accounts sillyAccount[], string name)
     bool found = false; // set the flag to 0
     for (int i = 0; i < SIZE; i++) //index through the structure-array
     {
-        if (sillyAccount[i].name == name)
+        if (name.compare(sillyAccount[i].name) == 0)
         {
             found = true;
             cout << "Account no.: " << i << endl;
@@ -174,13 +174,14 @@ void findCustomer(struct Accounts sillyAccount[], string name)
             cout << "-------------------------------" << endl;
         }
         else
-            cout << "No record of name in files. Try a different name." << endl;
+            cout << "No record of name. Try a different name." << endl;
     }
     return;
 } // end of findCustomer
 
 void newEntry(struct Accounts sillyAccount[], int i)
-{
+{       cin.ignore(); // clear buffer of the menuSelection string
+    
     cout << "Enter the full name for the account: ";
     getline (cin, sillyAccount[i].name); //store the input into
         cin.ignore(); // clear buffer into the newline character is reached
