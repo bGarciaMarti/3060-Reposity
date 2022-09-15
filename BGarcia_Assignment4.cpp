@@ -164,12 +164,14 @@ void newEntry(struct Accounts sillyAccount[], int i)
 
 void changeDetails(struct Accounts sillyAccount[], int account_number)
 {   bool change = false;
-    cout << "You are making changes to the data on account" << account_number << endl;
+    cout << "You are making changes to the data on account " << account_number << endl;
     cout << "Do you want to make changes to the name on file? (Enter a 'Y'/'y' or an 'N'/'n')";
     change = yesOrNo();
+    cin.ignore(); // clear the newline character from the buffer
     if (change == true)
         {cout << "Enter the new full name for the account: ";
         cin >> sillyAccount[account_number].name; //store the input into
+        cout << "\n";
         }
     change = false; // reset the bool-flag
     cout << "Do you want to make changes to the address on file? (Enter a 'Y'/'y' or an 'N'/'n')";
@@ -177,12 +179,16 @@ void changeDetails(struct Accounts sillyAccount[], int account_number)
     if (change == true)
         {   cout << "Enter the new street address for the account: ";
             cin >> sillyAccount[account_number].address;
+            cout << "\n";
             cout << "Enter the new city: ";
             cin >> sillyAccount[account_number].city;
+            cout << "\n";
             cout << "Enter the new state: ";
             cin >> sillyAccount[account_number].state;
+            cout << "\n";
             cout << "Enter the new ZIP code: ";
             cin >> sillyAccount[account_number].ZIP_CODE;
+            cout << "\n";
         }
     change = false; // reset the bool-flag
     cout << "Do you want to make changes to the phone number on file? (Enter a 'Y'/'y' or an 'N'/'n')";
@@ -190,6 +196,7 @@ void changeDetails(struct Accounts sillyAccount[], int account_number)
     if (change == true)
     {   cout << "Enter the new phone number: ";
         cin >> sillyAccount[account_number].phone_no;
+        cout << "\n";
     }
     change = false; // reset the bool-flag
     cout << "Do you want to make changes to the account balance? (Enter a 'Y'/'y' or an 'N'/'n')";
@@ -203,6 +210,7 @@ void changeDetails(struct Accounts sillyAccount[], int account_number)
             cout << "Enter a positive account balance: ";
             cin >> sillyAccount[account_number].account_balance;
         }
+        cout << "\n";
     }
     change = false; // reset the bool-flag
     cout << "Do you want to make changes to the date of last payment? (Enter a 'Y'/'y' or an 'N'/'n')";
@@ -211,6 +219,7 @@ void changeDetails(struct Accounts sillyAccount[], int account_number)
     {   cout << "Enter the date of last payment: ";
         cin.ignore();
         getline(cin, sillyAccount[account_number].last_payment_date);
+        cout << "\n";
     }
     return;
 } // end of changeDetails
