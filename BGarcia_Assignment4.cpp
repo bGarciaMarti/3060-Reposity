@@ -166,12 +166,12 @@ void changeDetails(struct Accounts sillyAccount[], int account_number)
 {   bool change = false;
     cout << "You are making changes to the data on account " << account_number << endl;
     cout << "Do you want to make changes to the name on file? (Enter a 'Y'/'y' or an 'N'/'n')";
-    cin.ignore(1000,'\n'); // clear buffer into the newline character is reached
+    cin.ignore(); // clear buffer into the newline character is reached
     change = yesOrNo();
     if (change == true)
         {cout << "Enter the new full name for the account: ";
-            cin.ignore(1000,'\n'); // clear buffer into the newline character is reached
         getline (cin, sillyAccount[account_number].name); //store the input into
+            cin.ignore(); // clear buffer into the newline character is reached
         cout << "\n";
         }
     change = false; // reset the bool-flag
@@ -179,17 +179,21 @@ void changeDetails(struct Accounts sillyAccount[], int account_number)
     change = yesOrNo();
     if (change == true)
         {   cout << "Enter the new street address for the account: ";
-            cin >> sillyAccount[account_number].address;
-            cout << "\n";
+                getline (cin, sillyAccount[account_number].address);
+                cin.ignore(); // clear buffer into the newline character is reached
+                cout << "\n";
             cout << "Enter the new city: ";
-            cin >> sillyAccount[account_number].city;
-            cout << "\n";
+                getline (cin, sillyAccount[account_number].city);
+                cin.ignore(); // clear buffer into the newline character is reached
+                cout << "\n";
             cout << "Enter the new state: ";
-            cin >> sillyAccount[account_number].state;
-            cout << "\n";
+                getline (cin, sillyAccount[account_number].state);
+                cin.ignore(); // clear buffer into the newline character is reached
+                cout << "\n";
             cout << "Enter the new ZIP code: ";
-            cin >> sillyAccount[account_number].ZIP_CODE;
-            cout << "\n";
+                getline (cin, sillyAccount[account_number].ZIP_CODE);
+                cin.ignore(); // clear buffer into the newline character is reached
+                cout << "\n";
         }
     change = false; // reset the bool-flag
     cout << "Do you want to make changes to the phone number on file? (Enter a 'Y'/'y' or an 'N'/'n')";
