@@ -166,11 +166,12 @@ void changeDetails(struct Accounts sillyAccount[], int account_number)
 {   bool change = false;
     cout << "You are making changes to the data on account " << account_number << endl;
     cout << "Do you want to make changes to the name on file? (Enter a 'Y'/'y' or an 'N'/'n')";
+    cin.ignore(1000,'\n'); // clear buffer into the newline character is reached
     change = yesOrNo();
-    cin.ignore(); // clear the newline character from the buffer
     if (change == true)
         {cout << "Enter the new full name for the account: ";
-        cin >> sillyAccount[account_number].name; //store the input into
+            cin.ignore(1000,'\n'); // clear buffer into the newline character is reached
+        getline (cin, sillyAccount[account_number].name); //store the input into
         cout << "\n";
         }
     change = false; // reset the bool-flag
