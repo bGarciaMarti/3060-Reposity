@@ -171,10 +171,12 @@ void findCustomer(struct Accounts sillyAccount[], string name)
             cout << "ZIP CODE: " << sillyAccount[i].ZIP_CODE << endl;
             cout << "Phone no.: " << sillyAccount[i].phone_no << endl;
             cout << "Balance: " << sillyAccount[i].account_balance << endl;
-            cout << "-------------------------------" << endl;
+            cout << "--------FOUND-----------" << endl;
         }
         else
+        {
             cout << "No record of name. Try a different name." << endl;
+        }
     }
     return;
 } // end of findCustomer
