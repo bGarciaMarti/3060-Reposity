@@ -52,7 +52,7 @@ bool yesOrNo(void);
 
 int main()
 {
-    int menuSelection = 0, accountNumber = 0, i = 0;
+    int menuSelection = 0, accountNumber = 0, pseudoIndex = 0;
     Accounts account[SIZE]; // array of Accounts
     Accounts customer; // a structure of the account objects
     string fullName;
@@ -64,7 +64,8 @@ int main()
     switch(menuSelection)
         {
         case 1:
-            newEntry(account, i); // give newEntry account-array and index i
+            newEntry(account, pseudoIndex); // give newEntry account-array and index i
+            pseudoIndex++; // increment through the array in order as accounts are created
             break;
         case 2:
             cout << "What is the account number to make changes to: ";
@@ -155,10 +156,68 @@ void displayAccounts(struct Accounts sillyAccount[])
 
 void findCustomer(struct Accounts sillyAccount[], string name)
 {
+    bool found = false; // set the flag to 0
+    for (int i = 0; i < SIZE; i++) //index through the structure-array
+    {
+        if (sillyAccount[i].name == name)
+        {
+            found = true;
+            cout << "Account no.: " << i << endl;
+            cout << "Account Holder's:\n";
+            cout << "Name: " << sillyAccount[i].name << endl;
+            cout << "Street address: " << sillyAccount[i].address << endl;
+            cout << "City: " << sillyAccount[i].city << endl;
+            cout << "State: " << sillyAccount[i].state << endl;
+            cout << "ZIP CODE: " << sillyAccount[i].ZIP_CODE << endl;
+            cout << "Phone no.: " << sillyAccount[i].phone_no << endl;
+            cout << "Balance: " << sillyAccount[i].account_balance << endl;
+            cout << "-------------------------------" << endl;
+        }
+        else
+            cout << "No record of name in files. Try a different name." << endl;
+    }
     return;
 } // end of findCustomer
+
 void newEntry(struct Accounts sillyAccount[], int i)
 {
+    cout << "Enter the full name for the account: ";
+    getline (cin, sillyAccount[i].name); //store the input into
+        cin.ignore(); // clear buffer into the newline character is reached
+    cout << "\n";
+    cout << "Enter the street address for the account: ";
+            getline (cin, sillyAccount[i].address);
+            cin.ignore(); // clear buffer into the newline character is reached
+            cout << "\n";
+        cout << "Enter the city: ";
+            getline (cin, sillyAccount[i].city);
+            cin.ignore(); // clear buffer into the newline character is reached
+            cout << "\n";
+        cout << "Enter the state: ";
+            getline (cin, sillyAccount[i].state);
+            cin.ignore(); // clear buffer into the newline character is reached
+            cout << "\n";
+        cout << "Enter the ZIP code: ";
+            getline (cin, sillyAccount[i].ZIP_CODE);
+            cin.ignore(); // clear buffer into the newline character is reached
+            cout << "\n";
+    cout << "Enter the  phone number: ";
+        getline (cin, sillyAccount[i].phone_no);
+        cin.ignore(); // clear buffer into the newline character is reached
+        cout << "\n";
+    cout << "Enter the account balance: ";
+        cin >> sillyAccount[i].account_balance;
+        while (sillyAccount[i].account_balance < 0) //if a negative value is entered
+        {
+            cout << "ERROR - INVALID NEGATIVE ENTRY - ";
+            cout << "Enter a positive account balance: ";
+            cin >> sillyAccount[i].account_balance;
+        }
+        cout << "\n";
+    cout << "Enter the date of last payment: ";
+        cin.ignore();
+        getline(cin, sillyAccount[i].last_payment_date);
+        cout << "\n";
     return;
 }
 
@@ -176,6 +235,7 @@ void changeDetails(struct Accounts sillyAccount[], int account_number)
         }
     change = false; // reset the bool-flag
     cout << "Do you want to make changes to the address on file? (Enter a 'Y'/'y' or an 'N'/'n')";
+    cin.ignore(); // clear buffer into the newline character is reached
     change = yesOrNo();
     if (change == true)
         {   cout << "Enter the new street address for the account: ";
@@ -197,15 +257,18 @@ void changeDetails(struct Accounts sillyAccount[], int account_number)
         }
     change = false; // reset the bool-flag
     cout << "Do you want to make changes to the phone number on file? (Enter a 'Y'/'y' or an 'N'/'n')";
+    cin.ignore(); // clear buffer into the newline character is reached
     change = yesOrNo();
     if (change == true)
     {   cout << "Enter the new phone number: ";
-        cin >> sillyAccount[account_number].phone_no;
+        getline (cin, sillyAccount[account_number].phone_no);
+        cin.ignore(); // clear buffer into the newline character is reached
         cout << "\n";
     }
     change = false; // reset the bool-flag
     cout << "Do you want to make changes to the account balance? (Enter a 'Y'/'y' or an 'N'/'n')";
     change = yesOrNo();
+    cin.ignore(); // clear the buffer
     if (change == true)
     {   cout << "Enter the account balance: ";
         cin >> sillyAccount[account_number].account_balance;
