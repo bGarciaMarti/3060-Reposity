@@ -62,7 +62,7 @@ struct Inventory{
     int quantity;
     struct Inventory *nextPtr; // pointer to the next node
 };
-typedef struct Inventory InventoryNode; // synonym for s
+typedef struct Inventory InventoryNode; // synonym
 typedef Inventory *InventoryNodePtr; // synonym for ListNode*
 
 
@@ -80,9 +80,9 @@ void insert(InventoryNodePtr *sillyPtr, char sillyName[BUFFER], int sillyQuant);
 // insert new values into the list in sorted order.
 // start at the headerPtr, and 'index' through the structs until the correct struct spot is found
 // ~~~ // ~~~ // ~~~ // ~~~ // ~~~ //
-void insert(InventoryNodePtr *sillyPtr, char sillyName[BUFFER], int sillyQuant)
+void newNode(InventoryNodePtr *sillyPtr, char sillyName[BUFFER], int sillyQuant)
 {
-    InventoryNodePtr newPtr = malloc(sizeof(Inventory)); // create node
+    InventoryNodePtr newPtr = new InventoryNodePtr; // create node
     if (newPtr != NULL) { // is space available
        // place values in node
         strcpy(newPtr->partDescription, sillyName);
@@ -127,7 +127,7 @@ void InitializeInventory(struct Inventory *silly_inventory, InventoryNodePtr sta
     int i = 0;
     for (i=0; i < PARTS; i++)
     {
-        insert(&startPtr, inventory_names[i], initial_inventory[i]);
+        newNode(&startPtr, inventory_names[i], initial_inventory[i]);
     }
     return;
 }
@@ -207,41 +207,7 @@ void Removeparts(int[]);
 // char find(struct Inventory *silly_inventory, char sillyName[BUFFER], int *sillyInventory)
 void WhichPart(struct Inventory *inventoryPtr)
 {   // return node's data if a match is found
-    bool found = false; //bool flag to find a part node
-    bool inRange = false; //bool flag to keep data in range: 0 <= inventory <= 30
-    int holdThis = 0; // a temporary variable to hold user input while validating
-    string sillyName;
-    
-    while ((found == false) && (inRange == false))
-    {
-        cout << "Enter the parts description exactly as it appears (case-sensitive): ";
-                getline (cin, sillyName);
-                cin.ignore(); // clear buffer into the newline character is reached
-                cout << "\n";
-    if (strcmp(sillyName, (inventoryPtr)->teamName) == 0) //if (sillyName == (*sillyPtr)->name)
-    {   *sillyInventory = (sillyPtr)->prices;
-        sillyPtr = (sillyPtr)->nextPtr;
-       return 1;
-   }
-   else
-   {
-       TeamTicket previousPtr = *sillyPtr;
-       TeamTicket *currentPtr = (sillyPtr)->nextPtr;
-
-      // loop to find the correct location in the list
-       while (  (currentPtr != NULL) && (strcmp(sillyName,currentPtr->teamName) != 0) ) //while the current pointer isn't the tail and the silly name and current->teamName DO NOT MATCH
-       { previousPtr = *currentPtr; // walk to ...
-         currentPtr = currentPtr->nextPtr; // ... next node
-       }
-
-      // copy the data node at currentPtr
-      if (currentPtr != NULL)
-      {   *sillyPrice = (currentPtr)->prices;
-          sillyPtr = (currentPtr)->nextPtr;
-          return 1;
-       }
-    }
-    return 0;
+    return;
 } // end of find
 
 // ~~~ // isEmpty alrogithm // ~~~ //
@@ -268,8 +234,8 @@ void printList(InventoryNodePtr currentPtr)
 
         // while not the end of the list
         while (currentPtr != NULL) {
-            cout << "Part description: " currentPtr.partDescription;
-        cout << "Quantity: " currentPtr.quantity
+            cout << "Part description: " << currentPtr->partDescription;
+            cout << "Quantity: " << currentPtr->quantity;
         cout << " --> ";
         currentPtr = currentPtr->nextPtr;
         }
