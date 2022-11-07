@@ -31,7 +31,7 @@ private:
     void deleteNode(T, TreeNode *&);
     void makeDeletion(TreeNode *&);
     void displayInOrder(TreeNode *);
-    //void inOrder(TreeNode *) ;
+    void inOrder(TreeNode *) ;
     //void displayPreOrder() const;
     void preOrder(TreeNode *);
     //void displayPostOrder() const;
@@ -54,8 +54,8 @@ public:
     void displayPreOrder() const
     { preOrder(root); }
 
-    void displayInOrder() const
-    { displayInOrder(root); }
+    void displayInOrder()
+    { inOrder(root); }
 
     void displayPostOrder() const
     { postOrder(root); }
@@ -138,22 +138,16 @@ bool BinaryTree<T>::searchNode(T item)
 
 // Create a method inorder() to arrange the data in In-order transversal
 template <class T>
-void BinaryTree<T>::displayInOrder(TreeNode *nodePtr)
+void BinaryTree<T>::inOrder(TreeNode *nodePtr)
 {
     if (nodePtr != NULL)
     {
-        if (nodePtr->left) displayInOrder(nodePtr->left);
-
+        inOrder(nodePtr->left);
         cout << " " << &nodePtr->value << " ";
-
-       if (nodePtr->right) displayInOrder(nodePtr->right);
+        inOrder(nodePtr->right);
 
        }
 
        else return;
-
 }
-
-
-
 #endif
