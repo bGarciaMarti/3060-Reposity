@@ -73,7 +73,7 @@ int main()
                         cin >> again;
                 }while (again == tolower('Y'));
         
-
+        }
 
     // Display in order
     tree.displayInOrder();
@@ -82,5 +82,5 @@ int main()
         //cout << endl;
         //tree.displayPostOrder();
 
-        }
+        
 }
